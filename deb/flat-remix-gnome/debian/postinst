@@ -1,24 +1,47 @@
-#!/bin/sh
-
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Dark/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Darkest/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Darkest-fullPanel/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Dark-fullPanel/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-fullPanel/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Miami/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Miami-Dark/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Miami-Dark-fullPanel/gnome-shell/gnome-shell.css > /dev/null
-update-alternatives --remove gdm3.css /usr/share/themes/Flat-Remix-Miami-fullPanel/gnome-shell/gnome-shell.css > /dev/null
-
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix/gnome-shell/gnome-shell.css 20
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Dark/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Darkest/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Darkest-fullPanel/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Dark-fullPanel/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-fullPanel/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Miami/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Miami-Dark/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Miami-Dark-fullPanel/gnome-shell/gnome-shell.css 17
-update-alternatives --install /usr/share/gnome-shell/theme/gdm3.css gdm3.css /usr/share/themes/Flat-Remix-Miami-fullPanel/gnome-shell/gnome-shell.css 17
-
+IyEvYmluL3NoCgp1cGRhdGUtYWx0ZXJuYXRpdmVzIC0tcmVtb3ZlIGdkbTMuY3NzIC91c3Ivc2hh
+cmUvdGhlbWVzL0ZsYXQtUmVtaXgvZ25vbWUtc2hlbGwvZ25vbWUtc2hlbGwuY3NzID4gL2Rldi9u
+dWxsCnVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUgZ2RtMy5jc3MgL3Vzci9zaGFyZS90aGVt
+ZXMvRmxhdC1SZW1peC1EYXJrL2dub21lLXNoZWxsL2dub21lLXNoZWxsLmNzcyA+IC9kZXYvbnVs
+bAp1cGRhdGUtYWx0ZXJuYXRpdmVzIC0tcmVtb3ZlIGdkbTMuY3NzIC91c3Ivc2hhcmUvdGhlbWVz
+L0ZsYXQtUmVtaXgtRGFya2VzdC9nbm9tZS1zaGVsbC9nbm9tZS1zaGVsbC5jc3MgPiAvZGV2L251
+bGwKdXBkYXRlLWFsdGVybmF0aXZlcyAtLXJlbW92ZSBnZG0zLmNzcyAvdXNyL3NoYXJlL3RoZW1l
+cy9GbGF0LVJlbWl4LURhcmtlc3QtZnVsbFBhbmVsL2dub21lLXNoZWxsL2dub21lLXNoZWxsLmNz
+cyA+IC9kZXYvbnVsbAp1cGRhdGUtYWx0ZXJuYXRpdmVzIC0tcmVtb3ZlIGdkbTMuY3NzIC91c3Iv
+c2hhcmUvdGhlbWVzL0ZsYXQtUmVtaXgtRGFyay1mdWxsUGFuZWwvZ25vbWUtc2hlbGwvZ25vbWUt
+c2hlbGwuY3NzID4gL2Rldi9udWxsCnVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUgZ2RtMy5j
+c3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC1mdWxsUGFuZWwvZ25vbWUtc2hlbGwvZ25v
+bWUtc2hlbGwuY3NzID4gL2Rldi9udWxsCnVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUgZ2Rt
+My5jc3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC1NaWFtaS9nbm9tZS1zaGVsbC9nbm9t
+ZS1zaGVsbC5jc3MgPiAvZGV2L251bGwKdXBkYXRlLWFsdGVybmF0aXZlcyAtLXJlbW92ZSBnZG0z
+LmNzcyAvdXNyL3NoYXJlL3RoZW1lcy9GbGF0LVJlbWl4LU1pYW1pLURhcmsvZ25vbWUtc2hlbGwv
+Z25vbWUtc2hlbGwuY3NzID4gL2Rldi9udWxsCnVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1yZW1vdmUg
+Z2RtMy5jc3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC1NaWFtaS1EYXJrLWZ1bGxQYW5l
+bC9nbm9tZS1zaGVsbC9nbm9tZS1zaGVsbC5jc3MgPiAvZGV2L251bGwKdXBkYXRlLWFsdGVybmF0
+aXZlcyAtLXJlbW92ZSBnZG0zLmNzcyAvdXNyL3NoYXJlL3RoZW1lcy9GbGF0LVJlbWl4LU1pYW1p
+LWZ1bGxQYW5lbC9nbm9tZS1zaGVsbC9nbm9tZS1zaGVsbC5jc3MgPiAvZGV2L251bGwKCnVwZGF0
+ZS1hbHRlcm5hdGl2ZXMgLS1pbnN0YWxsIC91c3Ivc2hhcmUvZ25vbWUtc2hlbGwvdGhlbWUvZ2Rt
+My5jc3MgZ2RtMy5jc3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC9nbm9tZS1zaGVsbC9n
+bm9tZS1zaGVsbC5jc3MgMjAKdXBkYXRlLWFsdGVybmF0aXZlcyAtLWluc3RhbGwgL3Vzci9zaGFy
+ZS9nbm9tZS1zaGVsbC90aGVtZS9nZG0zLmNzcyBnZG0zLmNzcyAvdXNyL3NoYXJlL3RoZW1lcy9G
+bGF0LVJlbWl4LURhcmsvZ25vbWUtc2hlbGwvZ25vbWUtc2hlbGwuY3NzIDE3CnVwZGF0ZS1hbHRl
+cm5hdGl2ZXMgLS1pbnN0YWxsIC91c3Ivc2hhcmUvZ25vbWUtc2hlbGwvdGhlbWUvZ2RtMy5jc3Mg
+Z2RtMy5jc3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC1EYXJrZXN0L2dub21lLXNoZWxs
+L2dub21lLXNoZWxsLmNzcyAxNwp1cGRhdGUtYWx0ZXJuYXRpdmVzIC0taW5zdGFsbCAvdXNyL3No
+YXJlL2dub21lLXNoZWxsL3RoZW1lL2dkbTMuY3NzIGdkbTMuY3NzIC91c3Ivc2hhcmUvdGhlbWVz
+L0ZsYXQtUmVtaXgtRGFya2VzdC1mdWxsUGFuZWwvZ25vbWUtc2hlbGwvZ25vbWUtc2hlbGwuY3Nz
+IDE3CnVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1pbnN0YWxsIC91c3Ivc2hhcmUvZ25vbWUtc2hlbGwv
+dGhlbWUvZ2RtMy5jc3MgZ2RtMy5jc3MgL3Vzci9zaGFyZS90aGVtZXMvRmxhdC1SZW1peC1EYXJr
+LWZ1bGxQYW5lbC9nbm9tZS1zaGVsbC9nbm9tZS1zaGVsbC5jc3MgMTcKdXBkYXRlLWFsdGVybmF0
+aXZlcyAtLWluc3RhbGwgL3Vzci9zaGFyZS9nbm9tZS1zaGVsbC90aGVtZS9nZG0zLmNzcyBnZG0z
+LmNzcyAvdXNyL3NoYXJlL3RoZW1lcy9GbGF0LVJlbWl4LWZ1bGxQYW5lbC9nbm9tZS1zaGVsbC9n
+bm9tZS1zaGVsbC5jc3MgMTcKdXBkYXRlLWFsdGVybmF0aXZlcyAtLWluc3RhbGwgL3Vzci9zaGFy
+ZS9nbm9tZS1zaGVsbC90aGVtZS9nZG0zLmNzcyBnZG0zLmNzcyAvdXNyL3NoYXJlL3RoZW1lcy9G
+bGF0LVJlbWl4LU1pYW1pL2dub21lLXNoZWxsL2dub21lLXNoZWxsLmNzcyAxNwp1cGRhdGUtYWx0
+ZXJuYXRpdmVzIC0taW5zdGFsbCAvdXNyL3NoYXJlL2dub21lLXNoZWxsL3RoZW1lL2dkbTMuY3Nz
+IGdkbTMuY3NzIC91c3Ivc2hhcmUvdGhlbWVzL0ZsYXQtUmVtaXgtTWlhbWktRGFyay9nbm9tZS1z
+aGVsbC9nbm9tZS1zaGVsbC5jc3MgMTcKdXBkYXRlLWFsdGVybmF0aXZlcyAtLWluc3RhbGwgL3Vz
+ci9zaGFyZS9nbm9tZS1zaGVsbC90aGVtZS9nZG0zLmNzcyBnZG0zLmNzcyAvdXNyL3NoYXJlL3Ro
+ZW1lcy9GbGF0LVJlbWl4LU1pYW1pLURhcmstZnVsbFBhbmVsL2dub21lLXNoZWxsL2dub21lLXNo
+ZWxsLmNzcyAxNwp1cGRhdGUtYWx0ZXJuYXRpdmVzIC0taW5zdGFsbCAvdXNyL3NoYXJlL2dub21l
+LXNoZWxsL3RoZW1lL2dkbTMuY3NzIGdkbTMuY3NzIC91c3Ivc2hhcmUvdGhlbWVzL0ZsYXQtUmVt
+aXgtTWlhbWktZnVsbFBhbmVsL2dub21lLXNoZWxsL2dub21lLXNoZWxsLmNzcyAxNwoK

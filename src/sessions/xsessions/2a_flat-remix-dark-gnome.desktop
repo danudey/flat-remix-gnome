@@ -1,7 +1,5 @@
-[Desktop Entry]
-Name=Flat Remix Dark
-Comment=This session logs you into Flat Remix Dark GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix-dark gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-Dark-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCBEYXJrCkNvbW1lbnQ9VGhpcyBzZXNzaW9u
+IGxvZ3MgeW91IGludG8gRmxhdCBSZW1peCBEYXJrIEdOT01FCkV4ZWM9ZW52IEdOT01FX1NIRUxM
+X1NFU1NJT05fTU9ERT1mbGF0LXJlbWl4LWRhcmsgZ25vbWUtc2Vzc2lvbgpUcnlFeGVjPWdub21l
+LXNlc3Npb24KVHlwZT1BcHBsaWNhdGlvbgpEZXNrdG9wTmFtZXM9RmxhdC1SZW1peC1EYXJrLUdO
+T01FO0dOT01FOwo=

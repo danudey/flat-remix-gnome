@@ -1,54 +1,28 @@
-[20190926]
- * Fix blurry popup menus
-
-[20190925]
- * Improve popup-menu margins for gnome-shell 3.34
-
-[20190918]
- * Fix gnome-shell 3.34 colors
- * Add folder editor styles
- * Add folder icon visual drag-over feedback
- * Add horizontal workspaces layout support
- * App icon helper tweaks
- * Increase window overview thumbnail border witdth
- * Provide icon helper classes
- * Don't apply overlap-preventing padding to search results
- * Set search results content max width for gnome-shell 3.34
- * Anotation 'UNTIL GNOME 3.32': custom styling of user submenu icon
- * Add pie-timer styles
- * Add ripple-pointer-location styles
- * Support TCRYPT
- * Move password entry to a grid
- * Remove window-clone-border corner gap
-
-[20190829]
- * Change lightbox background color to black
-
-[20190822]
- * Fix transparent wifi panel button
- * Change search-entry selected text colors
-
-[20190814]
- * Change screenShield notification colors
- * Add panel background transition on overview
- * Change app menu and overview colors
- * Remove panel background on overview
-
-[20190616]
- * Remove .modal-dialog-linked-button inset shadow for light variant
- * Change ScreenShield notification and app folder background
- * Lighten .modal-dialog-linked-button inset shadow
-
-[20190608]
- * Fix Pop OS theme conflicts; Fixes #89
-
-[20190530]
- * Remove dialog linked button focus decoration
-
-[20190514]
- * Use dafault login background if lock image is xml
- * Bring modal-dialog shadow back
- * Fix high contrast switches
- * Syncronize switch assets with gtk theme
- * Add shadow to close icons
-
+WzIwMTkwOTI2XQogKiBGaXggYmx1cnJ5IHBvcHVwIG1lbnVzCgpbMjAxOTA5MjVdCiAqIEltcHJv
+dmUgcG9wdXAtbWVudSBtYXJnaW5zIGZvciBnbm9tZS1zaGVsbCAzLjM0CgpbMjAxOTA5MThdCiAq
+IEZpeCBnbm9tZS1zaGVsbCAzLjM0IGNvbG9ycwogKiBBZGQgZm9sZGVyIGVkaXRvciBzdHlsZXMK
+ICogQWRkIGZvbGRlciBpY29uIHZpc3VhbCBkcmFnLW92ZXIgZmVlZGJhY2sKICogQWRkIGhvcml6
+b250YWwgd29ya3NwYWNlcyBsYXlvdXQgc3VwcG9ydAogKiBBcHAgaWNvbiBoZWxwZXIgdHdlYWtz
+CiAqIEluY3JlYXNlIHdpbmRvdyBvdmVydmlldyB0aHVtYm5haWwgYm9yZGVyIHdpdGR0aAogKiBQ
+cm92aWRlIGljb24gaGVscGVyIGNsYXNzZXMKICogRG9uJ3QgYXBwbHkgb3ZlcmxhcC1wcmV2ZW50
+aW5nIHBhZGRpbmcgdG8gc2VhcmNoIHJlc3VsdHMKICogU2V0IHNlYXJjaCByZXN1bHRzIGNvbnRl
+bnQgbWF4IHdpZHRoIGZvciBnbm9tZS1zaGVsbCAzLjM0CiAqIEFub3RhdGlvbiAnVU5USUwgR05P
+TUUgMy4zMic6IGN1c3RvbSBzdHlsaW5nIG9mIHVzZXIgc3VibWVudSBpY29uCiAqIEFkZCBwaWUt
+dGltZXIgc3R5bGVzCiAqIEFkZCByaXBwbGUtcG9pbnRlci1sb2NhdGlvbiBzdHlsZXMKICogU3Vw
+cG9ydCBUQ1JZUFQKICogTW92ZSBwYXNzd29yZCBlbnRyeSB0byBhIGdyaWQKICogUmVtb3ZlIHdp
+bmRvdy1jbG9uZS1ib3JkZXIgY29ybmVyIGdhcAoKWzIwMTkwODI5XQogKiBDaGFuZ2UgbGlnaHRi
+b3ggYmFja2dyb3VuZCBjb2xvciB0byBibGFjawoKWzIwMTkwODIyXQogKiBGaXggdHJhbnNwYXJl
+bnQgd2lmaSBwYW5lbCBidXR0b24KICogQ2hhbmdlIHNlYXJjaC1lbnRyeSBzZWxlY3RlZCB0ZXh0
+IGNvbG9ycwoKWzIwMTkwODE0XQogKiBDaGFuZ2Ugc2NyZWVuU2hpZWxkIG5vdGlmaWNhdGlvbiBj
+b2xvcnMKICogQWRkIHBhbmVsIGJhY2tncm91bmQgdHJhbnNpdGlvbiBvbiBvdmVydmlldwogKiBD
+aGFuZ2UgYXBwIG1lbnUgYW5kIG92ZXJ2aWV3IGNvbG9ycwogKiBSZW1vdmUgcGFuZWwgYmFja2dy
+b3VuZCBvbiBvdmVydmlldwoKWzIwMTkwNjE2XQogKiBSZW1vdmUgLm1vZGFsLWRpYWxvZy1saW5r
+ZWQtYnV0dG9uIGluc2V0IHNoYWRvdyBmb3IgbGlnaHQgdmFyaWFudAogKiBDaGFuZ2UgU2NyZWVu
+U2hpZWxkIG5vdGlmaWNhdGlvbiBhbmQgYXBwIGZvbGRlciBiYWNrZ3JvdW5kCiAqIExpZ2h0ZW4g
+Lm1vZGFsLWRpYWxvZy1saW5rZWQtYnV0dG9uIGluc2V0IHNoYWRvdwoKWzIwMTkwNjA4XQogKiBG
+aXggUG9wIE9TIHRoZW1lIGNvbmZsaWN0czsgRml4ZXMgIzg5CgpbMjAxOTA1MzBdCiAqIFJlbW92
+ZSBkaWFsb2cgbGlua2VkIGJ1dHRvbiBmb2N1cyBkZWNvcmF0aW9uCgpbMjAxOTA1MTRdCiAqIFVz
+ZSBkYWZhdWx0IGxvZ2luIGJhY2tncm91bmQgaWYgbG9jayBpbWFnZSBpcyB4bWwKICogQnJpbmcg
+bW9kYWwtZGlhbG9nIHNoYWRvdyBiYWNrCiAqIEZpeCBoaWdoIGNvbnRyYXN0IHN3aXRjaGVzCiAq
+IFN5bmNyb25pemUgc3dpdGNoIGFzc2V0cyB3aXRoIGd0ayB0aGVtZQogKiBBZGQgc2hhZG93IHRv
+IGNsb3NlIGljb25zCgo=

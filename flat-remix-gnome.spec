@@ -1,70 +1,39 @@
-Name: flat-remix-gnome
-Version: 20190926
-Release: 1
-License: CC-BY-SA-4.0
-Summary: Flat Remix GNOME theme
-Url: https://drasite.com/flat-remix-gnome
-Group: User Interface/Desktops
-Source: https://github.com/daniruiz/%{name}/archive/%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-build
-BuildArch: noarch
-
-%description
-Flat Remix GNOME theme is a pretty simple shell theme inspired on material design following a modern design using "flat" colors with high contrasts and sharp borders.
-
-Themes:
- • Flat Remix
- • Flat Remix Dark
- • Flat Remix Darkest
- • Flat Remix Miami
- • Flat Remix Miami Dark
-
-Variants:
- • Full Panel: No topbar spacing
-
-
-%prep
-%setup -q
-
-%install
-%make_install
-
-%build
-
-
-%post
-mv -n /usr/share/gnome-shell/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource.old
-ln -sf /usr/share/themes/Flat-Remix/gnome-shell-theme.gresource /usr/share/gnome-shell/gnome-shell-theme.gresource
-
-
-%postun
-mv /usr/share/gnome-shell/gnome-shell-theme.gresource.old /usr/share/gnome-shell/gnome-shell-theme.gresource
-
-%files
-%defattr(-,root,root)
-%doc LICENSE README.md
-%{_datadir}/themes/Flat-Remix-Miami-Dark
-%{_datadir}/themes/Flat-Remix-Darkest
-%{_datadir}/themes/Flat-Remix-Dark
-%{_datadir}/themes/Flat-Remix-Miami
-%{_datadir}/themes/Flat-Remix
-%{_datadir}/gnome-shell/theme/Flat-Remix-Miami-Dark
-%{_datadir}/gnome-shell/theme/Flat-Remix-Darkest
-%{_datadir}/gnome-shell/theme/Flat-Remix-Dark
-%{_datadir}/gnome-shell/theme/Flat-Remix-Miami
-%{_datadir}/gnome-shell/theme/Flat-Remix
-%{_datadir}/themes/Flat-Remix-Miami-Dark-fullPanel
-%{_datadir}/themes/Flat-Remix-Darkest-fullPanel
-%{_datadir}/themes/Flat-Remix-Dark-fullPanel
-%{_datadir}/themes/Flat-Remix-Miami-fullPanel
-%{_datadir}/themes/Flat-Remix-fullPanel
-%{_datadir}/gnome-shell/theme/Flat-Remix-Miami-Dark-fullPanel
-%{_datadir}/gnome-shell/theme/Flat-Remix-Darkest-fullPanel
-%{_datadir}/gnome-shell/theme/Flat-Remix-Dark-fullPanel
-%{_datadir}/gnome-shell/theme/Flat-Remix-Miami-fullPanel
-%{_datadir}/gnome-shell/theme/Flat-Remix-fullPanel
-%{_datadir}/gnome-shell/theme/assets
-%{_datadir}/gnome-shell/modes
-%{_datadir}/xsessions
-%{_datadir}/wayland-sessions
-
+TmFtZTogZmxhdC1yZW1peC1nbm9tZQpWZXJzaW9uOiAyMDE5MDkyNgpSZWxlYXNlOiAxCkxpY2Vu
+c2U6IENDLUJZLVNBLTQuMApTdW1tYXJ5OiBGbGF0IFJlbWl4IEdOT01FIHRoZW1lClVybDogaHR0
+cHM6Ly9kcmFzaXRlLmNvbS9mbGF0LXJlbWl4LWdub21lCkdyb3VwOiBVc2VyIEludGVyZmFjZS9E
+ZXNrdG9wcwpTb3VyY2U6IGh0dHBzOi8vZ2l0aHViLmNvbS9kYW5pcnVpei8le25hbWV9L2FyY2hp
+dmUvJXt2ZXJzaW9ufS50YXIuZ3oKQnVpbGRSb290OiAle190bXBwYXRofS8le25hbWV9LSV7dmVy
+c2lvbn0tYnVpbGQKQnVpbGRBcmNoOiBub2FyY2gKCiVkZXNjcmlwdGlvbgpGbGF0IFJlbWl4IEdO
+T01FIHRoZW1lIGlzIGEgcHJldHR5IHNpbXBsZSBzaGVsbCB0aGVtZSBpbnNwaXJlZCBvbiBtYXRl
+cmlhbCBkZXNpZ24gZm9sbG93aW5nIGEgbW9kZXJuIGRlc2lnbiB1c2luZyAiZmxhdCIgY29sb3Jz
+IHdpdGggaGlnaCBjb250cmFzdHMgYW5kIHNoYXJwIGJvcmRlcnMuCgpUaGVtZXM6CiDigKIgRmxh
+dCBSZW1peAog4oCiIEZsYXQgUmVtaXggRGFyawog4oCiIEZsYXQgUmVtaXggRGFya2VzdAog4oCi
+IEZsYXQgUmVtaXggTWlhbWkKIOKAoiBGbGF0IFJlbWl4IE1pYW1pIERhcmsKClZhcmlhbnRzOgog
+4oCiIEZ1bGwgUGFuZWw6IE5vIHRvcGJhciBzcGFjaW5nCgoKJXByZXAKJXNldHVwIC1xCgolaW5z
+dGFsbAolbWFrZV9pbnN0YWxsCgolYnVpbGQKCgolcG9zdAptdiAtbiAvdXNyL3NoYXJlL2dub21l
+LXNoZWxsL2dub21lLXNoZWxsLXRoZW1lLmdyZXNvdXJjZSAvdXNyL3NoYXJlL2dub21lLXNoZWxs
+L2dub21lLXNoZWxsLXRoZW1lLmdyZXNvdXJjZS5vbGQKbG4gLXNmIC91c3Ivc2hhcmUvdGhlbWVz
+L0ZsYXQtUmVtaXgvZ25vbWUtc2hlbGwtdGhlbWUuZ3Jlc291cmNlIC91c3Ivc2hhcmUvZ25vbWUt
+c2hlbGwvZ25vbWUtc2hlbGwtdGhlbWUuZ3Jlc291cmNlCgoKJXBvc3R1bgptdiAvdXNyL3NoYXJl
+L2dub21lLXNoZWxsL2dub21lLXNoZWxsLXRoZW1lLmdyZXNvdXJjZS5vbGQgL3Vzci9zaGFyZS9n
+bm9tZS1zaGVsbC9nbm9tZS1zaGVsbC10aGVtZS5ncmVzb3VyY2UKCiVmaWxlcwolZGVmYXR0cigt
+LHJvb3Qscm9vdCkKJWRvYyBMSUNFTlNFIFJFQURNRS5tZAole19kYXRhZGlyfS90aGVtZXMvRmxh
+dC1SZW1peC1NaWFtaS1EYXJrCiV7X2RhdGFkaXJ9L3RoZW1lcy9GbGF0LVJlbWl4LURhcmtlc3QK
+JXtfZGF0YWRpcn0vdGhlbWVzL0ZsYXQtUmVtaXgtRGFyawole19kYXRhZGlyfS90aGVtZXMvRmxh
+dC1SZW1peC1NaWFtaQole19kYXRhZGlyfS90aGVtZXMvRmxhdC1SZW1peAole19kYXRhZGlyfS9n
+bm9tZS1zaGVsbC90aGVtZS9GbGF0LVJlbWl4LU1pYW1pLURhcmsKJXtfZGF0YWRpcn0vZ25vbWUt
+c2hlbGwvdGhlbWUvRmxhdC1SZW1peC1EYXJrZXN0CiV7X2RhdGFkaXJ9L2dub21lLXNoZWxsL3Ro
+ZW1lL0ZsYXQtUmVtaXgtRGFyawole19kYXRhZGlyfS9nbm9tZS1zaGVsbC90aGVtZS9GbGF0LVJl
+bWl4LU1pYW1pCiV7X2RhdGFkaXJ9L2dub21lLXNoZWxsL3RoZW1lL0ZsYXQtUmVtaXgKJXtfZGF0
+YWRpcn0vdGhlbWVzL0ZsYXQtUmVtaXgtTWlhbWktRGFyay1mdWxsUGFuZWwKJXtfZGF0YWRpcn0v
+dGhlbWVzL0ZsYXQtUmVtaXgtRGFya2VzdC1mdWxsUGFuZWwKJXtfZGF0YWRpcn0vdGhlbWVzL0Zs
+YXQtUmVtaXgtRGFyay1mdWxsUGFuZWwKJXtfZGF0YWRpcn0vdGhlbWVzL0ZsYXQtUmVtaXgtTWlh
+bWktZnVsbFBhbmVsCiV7X2RhdGFkaXJ9L3RoZW1lcy9GbGF0LVJlbWl4LWZ1bGxQYW5lbAole19k
+YXRhZGlyfS9nbm9tZS1zaGVsbC90aGVtZS9GbGF0LVJlbWl4LU1pYW1pLURhcmstZnVsbFBhbmVs
+CiV7X2RhdGFkaXJ9L2dub21lLXNoZWxsL3RoZW1lL0ZsYXQtUmVtaXgtRGFya2VzdC1mdWxsUGFu
+ZWwKJXtfZGF0YWRpcn0vZ25vbWUtc2hlbGwvdGhlbWUvRmxhdC1SZW1peC1EYXJrLWZ1bGxQYW5l
+bAole19kYXRhZGlyfS9nbm9tZS1zaGVsbC90aGVtZS9GbGF0LVJlbWl4LU1pYW1pLWZ1bGxQYW5l
+bAole19kYXRhZGlyfS9nbm9tZS1zaGVsbC90aGVtZS9GbGF0LVJlbWl4LWZ1bGxQYW5lbAole19k
+YXRhZGlyfS9nbm9tZS1zaGVsbC90aGVtZS9hc3NldHMKJXtfZGF0YWRpcn0vZ25vbWUtc2hlbGwv
+bW9kZXMKJXtfZGF0YWRpcn0veHNlc3Npb25zCiV7X2RhdGFkaXJ9L3dheWxhbmQtc2Vzc2lvbnMK
+Cg==

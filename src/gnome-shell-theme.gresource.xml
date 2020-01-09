@@ -1,33 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<gresources>
-  <gresource prefix="/org/gnome/shell/theme">
-    <file>gnome-shell.css</file>
-    <file>gnome-shell-high-contrast.css</file>
-    <file>pad-osd.css</file>
-    <file>calendar-arrow-left.svg</file>
-    <file>calendar-arrow-right.svg</file>
-    <file>checkbox-focused.svg</file>
-    <file>checkbox-off-focused.svg</file>
-    <file>checkbox-off.svg</file>
-    <file>checkbox.svg</file>
-    <file>close-window-active.svg</file>
-    <file>close-window-hover.svg</file>
-    <file>close-window.svg</file>
-    <file>key-enter.svg</file>
-    <file>key-hide.svg</file>
-    <file>key-layout.svg</file>
-    <file>key-shift-latched-uppercase.svg</file>
-    <file>key-shift.svg</file>
-    <file>key-shift-uppercase.svg</file>
-    <file>login-background</file>
-    <file>no-events.svg</file>
-    <file>no-notifications.svg</file>
-    <file>noise-texture.png</file>
-    <file>process-working.svg</file>
-    <file>toggle-off-hc.svg</file>
-    <file>toggle-off.svg</file>
-    <file>toggle-on-hc.svg</file>
-    <file>toggle-on.svg</file>
-    <file>view-grid-symbolic.svg</file>
-  </gresource>
-</gresources>
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGdyZXNvdXJjZXM+CiAgPGdy
+ZXNvdXJjZSBwcmVmaXg9Ii9vcmcvZ25vbWUvc2hlbGwvdGhlbWUiPgogICAgPGZpbGU+Z25vbWUt
+c2hlbGwuY3NzPC9maWxlPgogICAgPGZpbGU+Z25vbWUtc2hlbGwtaGlnaC1jb250cmFzdC5jc3M8
+L2ZpbGU+CiAgICA8ZmlsZT5wYWQtb3NkLmNzczwvZmlsZT4KICAgIDxmaWxlPmNhbGVuZGFyLWFy
+cm93LWxlZnQuc3ZnPC9maWxlPgogICAgPGZpbGU+Y2FsZW5kYXItYXJyb3ctcmlnaHQuc3ZnPC9m
+aWxlPgogICAgPGZpbGU+Y2hlY2tib3gtZm9jdXNlZC5zdmc8L2ZpbGU+CiAgICA8ZmlsZT5jaGVj
+a2JveC1vZmYtZm9jdXNlZC5zdmc8L2ZpbGU+CiAgICA8ZmlsZT5jaGVja2JveC1vZmYuc3ZnPC9m
+aWxlPgogICAgPGZpbGU+Y2hlY2tib3guc3ZnPC9maWxlPgogICAgPGZpbGU+Y2xvc2Utd2luZG93
+LWFjdGl2ZS5zdmc8L2ZpbGU+CiAgICA8ZmlsZT5jbG9zZS13aW5kb3ctaG92ZXIuc3ZnPC9maWxl
+PgogICAgPGZpbGU+Y2xvc2Utd2luZG93LnN2ZzwvZmlsZT4KICAgIDxmaWxlPmtleS1lbnRlci5z
+dmc8L2ZpbGU+CiAgICA8ZmlsZT5rZXktaGlkZS5zdmc8L2ZpbGU+CiAgICA8ZmlsZT5rZXktbGF5
+b3V0LnN2ZzwvZmlsZT4KICAgIDxmaWxlPmtleS1zaGlmdC1sYXRjaGVkLXVwcGVyY2FzZS5zdmc8
+L2ZpbGU+CiAgICA8ZmlsZT5rZXktc2hpZnQuc3ZnPC9maWxlPgogICAgPGZpbGU+a2V5LXNoaWZ0
+LXVwcGVyY2FzZS5zdmc8L2ZpbGU+CiAgICA8ZmlsZT5sb2dpbi1iYWNrZ3JvdW5kPC9maWxlPgog
+ICAgPGZpbGU+bm8tZXZlbnRzLnN2ZzwvZmlsZT4KICAgIDxmaWxlPm5vLW5vdGlmaWNhdGlvbnMu
+c3ZnPC9maWxlPgogICAgPGZpbGU+bm9pc2UtdGV4dHVyZS5wbmc8L2ZpbGU+CiAgICA8ZmlsZT5w
+cm9jZXNzLXdvcmtpbmcuc3ZnPC9maWxlPgogICAgPGZpbGU+dG9nZ2xlLW9mZi1oYy5zdmc8L2Zp
+bGU+CiAgICA8ZmlsZT50b2dnbGUtb2ZmLnN2ZzwvZmlsZT4KICAgIDxmaWxlPnRvZ2dsZS1vbi1o
+Yy5zdmc8L2ZpbGU+CiAgICA8ZmlsZT50b2dnbGUtb24uc3ZnPC9maWxlPgogICAgPGZpbGU+dmll
+dy1ncmlkLXN5bWJvbGljLnN2ZzwvZmlsZT4KICA8L2dyZXNvdXJjZT4KPC9ncmVzb3VyY2VzPgo=

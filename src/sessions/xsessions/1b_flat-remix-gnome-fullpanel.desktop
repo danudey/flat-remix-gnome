@@ -1,7 +1,5 @@
-[Desktop Entry]
-Name=Flat Remix (full panel)
-Comment=This session logs you into Flat Remix GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix-fullpanel gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCAoZnVsbCBwYW5lbCkKQ29tbWVudD1UaGlz
+IHNlc3Npb24gbG9ncyB5b3UgaW50byBGbGF0IFJlbWl4IEdOT01FCkV4ZWM9ZW52IEdOT01FX1NI
+RUxMX1NFU1NJT05fTU9ERT1mbGF0LXJlbWl4LWZ1bGxwYW5lbCBnbm9tZS1zZXNzaW9uClRyeUV4
+ZWM9Z25vbWUtc2Vzc2lvbgpUeXBlPUFwcGxpY2F0aW9uCkRlc2t0b3BOYW1lcz1GbGF0LVJlbWl4
+LUdOT01FO0dOT01FOwo=

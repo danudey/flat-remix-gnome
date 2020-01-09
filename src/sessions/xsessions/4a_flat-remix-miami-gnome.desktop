@@ -1,7 +1,5 @@
-[Desktop Entry]
-Name=Flat Remix Miami
-Comment=This session logs you into Flat Remix Miami GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix-miami gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-Miami-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCBNaWFtaQpDb21tZW50PVRoaXMgc2Vzc2lv
+biBsb2dzIHlvdSBpbnRvIEZsYXQgUmVtaXggTWlhbWkgR05PTUUKRXhlYz1lbnYgR05PTUVfU0hF
+TExfU0VTU0lPTl9NT0RFPWZsYXQtcmVtaXgtbWlhbWkgZ25vbWUtc2Vzc2lvbgpUcnlFeGVjPWdu
+b21lLXNlc3Npb24KVHlwZT1BcHBsaWNhdGlvbgpEZXNrdG9wTmFtZXM9RmxhdC1SZW1peC1NaWFt
+aS1HTk9NRTtHTk9NRTsK

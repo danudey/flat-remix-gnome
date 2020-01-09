@@ -1,18 +1,10 @@
-@import "Flat-Remix-Darkest";
-
-//force symbolic icons
-stage {
-  -st-icon-style: symbolic;
-}
-
-.toggle-switch {
-    background-image: url("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
-    &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-hc.svg"); }
-}
-
-@each $v in us, intl {
-  .toggle-switch-#{$v} {
-    background-image: url("resource:///org/gnome/shell/theme/toggle-off-hc.svg");
-    &:checked { background-image: url("resource:///org/gnome/shell/theme/toggle-on-hc.svg"); }
-  }
-}
+QGltcG9ydCAiRmxhdC1SZW1peC1EYXJrZXN0IjsKCi8vZm9yY2Ugc3ltYm9saWMgaWNvbnMKc3Rh
+Z2UgewogIC1zdC1pY29uLXN0eWxlOiBzeW1ib2xpYzsKfQoKLnRvZ2dsZS1zd2l0Y2ggewogICAg
+YmFja2dyb3VuZC1pbWFnZTogdXJsKCJyZXNvdXJjZTovLy9vcmcvZ25vbWUvc2hlbGwvdGhlbWUv
+dG9nZ2xlLW9mZi1oYy5zdmciKTsKICAgICY6Y2hlY2tlZCB7IGJhY2tncm91bmQtaW1hZ2U6IHVy
+bCgicmVzb3VyY2U6Ly8vb3JnL2dub21lL3NoZWxsL3RoZW1lL3RvZ2dsZS1vbi1oYy5zdmciKTsg
+fQp9CgpAZWFjaCAkdiBpbiB1cywgaW50bCB7CiAgLnRvZ2dsZS1zd2l0Y2gtI3skdn0gewogICAg
+YmFja2dyb3VuZC1pbWFnZTogdXJsKCJyZXNvdXJjZTovLy9vcmcvZ25vbWUvc2hlbGwvdGhlbWUv
+dG9nZ2xlLW9mZi1oYy5zdmciKTsKICAgICY6Y2hlY2tlZCB7IGJhY2tncm91bmQtaW1hZ2U6IHVy
+bCgicmVzb3VyY2U6Ly8vb3JnL2dub21lL3NoZWxsL3RoZW1lL3RvZ2dsZS1vbi1oYy5zdmciKTsg
+fQogIH0KfQo=

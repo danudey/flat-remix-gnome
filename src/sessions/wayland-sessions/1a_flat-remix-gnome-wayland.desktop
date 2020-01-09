@@ -1,7 +1,5 @@
-[Desktop Entry]
-Name=Flat Remix on Wayland
-Comment=This session logs you into Flat Remix GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCBvbiBXYXlsYW5kCkNvbW1lbnQ9VGhpcyBz
+ZXNzaW9uIGxvZ3MgeW91IGludG8gRmxhdCBSZW1peCBHTk9NRQpFeGVjPWVudiBHTk9NRV9TSEVM
+TF9TRVNTSU9OX01PREU9ZmxhdC1yZW1peCBnbm9tZS1zZXNzaW9uClRyeUV4ZWM9Z25vbWUtc2Vz
+c2lvbgpUeXBlPUFwcGxpY2F0aW9uCkRlc2t0b3BOYW1lcz1GbGF0LVJlbWl4LUdOT01FO0dOT01F
+Owo=

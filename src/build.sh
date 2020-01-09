@@ -1,117 +1,52 @@
-#!/bin/bash
-
-USAGE="
-$(basename "$0") [--login-background FILE]
-    Generate Flat-Remix gnome-shell theme variants
-
-    Options:
-      --login-background FILE    use a custom login background image
-      --sync-login-background    use gnome settings lock background as login background image
-      --blur N                   apply gaussian blur to login background image (default 2.5)
-      -r, --rebuild-theme        regenerate theme CSS files
-      -h, --help                 show this help text
-"
-
-
-TMP="/tmp/flat-remix-gnome"
-LOGIN_BACKGROUND=''
-BLUR=6
-
-get_login_background()
-{
-dconf read /org/gnome/desktop/screensaver/picture-uri | python <(cat <<EOF
-import sys
-if sys.version_info.major == 2:
-    from urllib import unquote
-    from urlparse import urlparse
-    data = raw_input()
-else:
-    from urllib.parse import urlparse, unquote
-    data = input()
-
-print(urlparse(unquote(data.strip("'"))).path)
-EOF
-)
-
-}
-
-while [ $# -gt 0 ]
-do
-	key="$1"
-
-	case $key in
-		--login-background)
-			LOGIN_BACKGROUND="$2"
-			shift # past argument
-			shift # past value
-			;;
-		--sync-login-background)
-			SYNC_LOGIN_BACKGROUND=1
-			shift # past argument
-			;;
-		-r|--rebuild-theme)
-			REBUILD_CSS=1
-			shift # past argument
-			;;
-		--blur)
-			BLUR="$2"
-			shift # past argument
-			shift # past value
-			;;
-		-h|--help)
-			echo "$USAGE"
-			exit 0
-			;;
-	esac
-done
-
-
-rm -rf "$TMP"
-mkdir -p "$TMP"
-
-# Build CSS files
-if [ -n "$REBUILD_CSS" ]
-then
-	for scss in sass/*.scss
-	do
-		scss --sourcemap=none -C -q "$scss" css/"$(basename "${scss%%.scss}")".css
-	done
-fi
-
-for css in css/Flat-Remix*.css
-do
-	cp -f "$css" ../"$(basename "${css%.css}")"/gnome-shell/gnome-shell.css
-done
-
-# Copy assets
-[ -n "$SYNC_LOGIN_BACKGROUND" ] && LOGIN_BACKGROUND=$(get_login_background)
-[ "${LOGIN_BACKGROUND##*.}" = xml ] && LOGIN_BACKGROUND=''
-if [ -n "$LOGIN_BACKGROUND" ]
-then
-	if [ "$BLUR" -lt 1 ] || [ "$BLUR" -eq 1 ]
-		then convert -gaussian-blur 0x"${BLUR}" "$LOGIN_BACKGROUND" "$TMP"/login-background;
-		else convert -scale 10% -gaussian-blur 0x"${BLUR}" -resize 1000% "$LOGIN_BACKGROUND" "$TMP"/login-background;
-	fi
-fi
-for assets in assets/*
-do
-	target=../"${assets#assets/}"/gnome-shell/assets
-	rm -f "$target"/*
-	cp -rf "$assets"/* "$target"
-	[ -n "$LOGIN_BACKGROUND" ] && cp -f "$TMP"/login-background "$target"/login-background
-done
-
-# Generate gresource files
-cp -r assets/* "$TMP"
-cp css/* "$TMP"
-sed "s/assets/resource:\/\/\/org\/gnome\/shell\/theme/g" -i "$TMP"/*.css
-find "$TMP" -name "Flat-Remix*" -type d | while IFS= read -r theme
-do
-	[ -n "$LOGIN_BACKGROUND" ] && cp -f "$TMP"/login-background "$theme"/login-background
-	cp gnome-shell-theme.gresource.xml "$theme"
-	cp "$TMP"/"$(basename "$theme")".css "$theme"/gnome-shell.css
-	cp "$TMP"/gnome-shell-high-contrast.css "$theme"
-	cp pad-osd.css "$theme"
-	(cd "$theme" && glib-compile-resources gnome-shell-theme.gresource.xml)
-	cp "$theme"/gnome-shell-theme.gresource ../"$(basename "$theme")"
-done
+IyEvYmluL2Jhc2gKClVTQUdFPSIKJChiYXNlbmFtZSAiJDAiKSBbLS1sb2dpbi1iYWNrZ3JvdW5k
+IEZJTEVdCiAgICBHZW5lcmF0ZSBGbGF0LVJlbWl4IGdub21lLXNoZWxsIHRoZW1lIHZhcmlhbnRz
+CgogICAgT3B0aW9uczoKICAgICAgLS1sb2dpbi1iYWNrZ3JvdW5kIEZJTEUgICAgdXNlIGEgY3Vz
+dG9tIGxvZ2luIGJhY2tncm91bmQgaW1hZ2UKICAgICAgLS1zeW5jLWxvZ2luLWJhY2tncm91bmQg
+ICAgdXNlIGdub21lIHNldHRpbmdzIGxvY2sgYmFja2dyb3VuZCBhcyBsb2dpbiBiYWNrZ3JvdW5k
+IGltYWdlCiAgICAgIC0tYmx1ciBOICAgICAgICAgICAgICAgICAgIGFwcGx5IGdhdXNzaWFuIGJs
+dXIgdG8gbG9naW4gYmFja2dyb3VuZCBpbWFnZSAoZGVmYXVsdCAyLjUpCiAgICAgIC1yLCAtLXJl
+YnVpbGQtdGhlbWUgICAgICAgIHJlZ2VuZXJhdGUgdGhlbWUgQ1NTIGZpbGVzCiAgICAgIC1oLCAt
+LWhlbHAgICAgICAgICAgICAgICAgIHNob3cgdGhpcyBoZWxwIHRleHQKIgoKClRNUD0iL3RtcC9m
+bGF0LXJlbWl4LWdub21lIgpMT0dJTl9CQUNLR1JPVU5EPScnCkJMVVI9NgoKZ2V0X2xvZ2luX2Jh
+Y2tncm91bmQoKQp7CmRjb25mIHJlYWQgL29yZy9nbm9tZS9kZXNrdG9wL3NjcmVlbnNhdmVyL3Bp
+Y3R1cmUtdXJpIHwgcHl0aG9uIDwoY2F0IDw8RU9GCmltcG9ydCBzeXMKaWYgc3lzLnZlcnNpb25f
+aW5mby5tYWpvciA9PSAyOgogICAgZnJvbSB1cmxsaWIgaW1wb3J0IHVucXVvdGUKICAgIGZyb20g
+dXJscGFyc2UgaW1wb3J0IHVybHBhcnNlCiAgICBkYXRhID0gcmF3X2lucHV0KCkKZWxzZToKICAg
+IGZyb20gdXJsbGliLnBhcnNlIGltcG9ydCB1cmxwYXJzZSwgdW5xdW90ZQogICAgZGF0YSA9IGlu
+cHV0KCkKCnByaW50KHVybHBhcnNlKHVucXVvdGUoZGF0YS5zdHJpcCgiJyIpKSkucGF0aCkKRU9G
+CikKCn0KCndoaWxlIFsgJCMgLWd0IDAgXQpkbwoJa2V5PSIkMSIKCgljYXNlICRrZXkgaW4KCQkt
+LWxvZ2luLWJhY2tncm91bmQpCgkJCUxPR0lOX0JBQ0tHUk9VTkQ9IiQyIgoJCQlzaGlmdCAjIHBh
+c3QgYXJndW1lbnQKCQkJc2hpZnQgIyBwYXN0IHZhbHVlCgkJCTs7CgkJLS1zeW5jLWxvZ2luLWJh
+Y2tncm91bmQpCgkJCVNZTkNfTE9HSU5fQkFDS0dST1VORD0xCgkJCXNoaWZ0ICMgcGFzdCBhcmd1
+bWVudAoJCQk7OwoJCS1yfC0tcmVidWlsZC10aGVtZSkKCQkJUkVCVUlMRF9DU1M9MQoJCQlzaGlm
+dCAjIHBhc3QgYXJndW1lbnQKCQkJOzsKCQktLWJsdXIpCgkJCUJMVVI9IiQyIgoJCQlzaGlmdCAj
+IHBhc3QgYXJndW1lbnQKCQkJc2hpZnQgIyBwYXN0IHZhbHVlCgkJCTs7CgkJLWh8LS1oZWxwKQoJ
+CQllY2hvICIkVVNBR0UiCgkJCWV4aXQgMAoJCQk7OwoJZXNhYwpkb25lCgoKcm0gLXJmICIkVE1Q
+Igpta2RpciAtcCAiJFRNUCIKCiMgQnVpbGQgQ1NTIGZpbGVzCmlmIFsgLW4gIiRSRUJVSUxEX0NT
+UyIgXQp0aGVuCglmb3Igc2NzcyBpbiBzYXNzLyouc2NzcwoJZG8KCQlzY3NzIC0tc291cmNlbWFw
+PW5vbmUgLUMgLXEgIiRzY3NzIiBjc3MvIiQoYmFzZW5hbWUgIiR7c2NzcyUlLnNjc3N9IikiLmNz
+cwoJZG9uZQpmaQoKZm9yIGNzcyBpbiBjc3MvRmxhdC1SZW1peCouY3NzCmRvCgljcCAtZiAiJGNz
+cyIgLi4vIiQoYmFzZW5hbWUgIiR7Y3NzJS5jc3N9IikiL2dub21lLXNoZWxsL2dub21lLXNoZWxs
+LmNzcwpkb25lCgojIENvcHkgYXNzZXRzClsgLW4gIiRTWU5DX0xPR0lOX0JBQ0tHUk9VTkQiIF0g
+JiYgTE9HSU5fQkFDS0dST1VORD0kKGdldF9sb2dpbl9iYWNrZ3JvdW5kKQpbICIke0xPR0lOX0JB
+Q0tHUk9VTkQjIyoufSIgPSB4bWwgXSAmJiBMT0dJTl9CQUNLR1JPVU5EPScnCmlmIFsgLW4gIiRM
+T0dJTl9CQUNLR1JPVU5EIiBdCnRoZW4KCWlmIFsgIiRCTFVSIiAtbHQgMSBdIHx8IFsgIiRCTFVS
+IiAtZXEgMSBdCgkJdGhlbiBjb252ZXJ0IC1nYXVzc2lhbi1ibHVyIDB4IiR7QkxVUn0iICIkTE9H
+SU5fQkFDS0dST1VORCIgIiRUTVAiL2xvZ2luLWJhY2tncm91bmQ7CgkJZWxzZSBjb252ZXJ0IC1z
+Y2FsZSAxMCUgLWdhdXNzaWFuLWJsdXIgMHgiJHtCTFVSfSIgLXJlc2l6ZSAxMDAwJSAiJExPR0lO
+X0JBQ0tHUk9VTkQiICIkVE1QIi9sb2dpbi1iYWNrZ3JvdW5kOwoJZmkKZmkKZm9yIGFzc2V0cyBp
+biBhc3NldHMvKgpkbwoJdGFyZ2V0PS4uLyIke2Fzc2V0cyNhc3NldHMvfSIvZ25vbWUtc2hlbGwv
+YXNzZXRzCglybSAtZiAiJHRhcmdldCIvKgoJY3AgLXJmICIkYXNzZXRzIi8qICIkdGFyZ2V0IgoJ
+WyAtbiAiJExPR0lOX0JBQ0tHUk9VTkQiIF0gJiYgY3AgLWYgIiRUTVAiL2xvZ2luLWJhY2tncm91
+bmQgIiR0YXJnZXQiL2xvZ2luLWJhY2tncm91bmQKZG9uZQoKIyBHZW5lcmF0ZSBncmVzb3VyY2Ug
+ZmlsZXMKY3AgLXIgYXNzZXRzLyogIiRUTVAiCmNwIGNzcy8qICIkVE1QIgpzZWQgInMvYXNzZXRz
+L3Jlc291cmNlOlwvXC9cL29yZ1wvZ25vbWVcL3NoZWxsXC90aGVtZS9nIiAtaSAiJFRNUCIvKi5j
+c3MKZmluZCAiJFRNUCIgLW5hbWUgIkZsYXQtUmVtaXgqIiAtdHlwZSBkIHwgd2hpbGUgSUZTPSBy
+ZWFkIC1yIHRoZW1lCmRvCglbIC1uICIkTE9HSU5fQkFDS0dST1VORCIgXSAmJiBjcCAtZiAiJFRN
+UCIvbG9naW4tYmFja2dyb3VuZCAiJHRoZW1lIi9sb2dpbi1iYWNrZ3JvdW5kCgljcCBnbm9tZS1z
+aGVsbC10aGVtZS5ncmVzb3VyY2UueG1sICIkdGhlbWUiCgljcCAiJFRNUCIvIiQoYmFzZW5hbWUg
+IiR0aGVtZSIpIi5jc3MgIiR0aGVtZSIvZ25vbWUtc2hlbGwuY3NzCgljcCAiJFRNUCIvZ25vbWUt
+c2hlbGwtaGlnaC1jb250cmFzdC5jc3MgIiR0aGVtZSIKCWNwIHBhZC1vc2QuY3NzICIkdGhlbWUi
+CgkoY2QgIiR0aGVtZSIgJiYgZ2xpYi1jb21waWxlLXJlc291cmNlcyBnbm9tZS1zaGVsbC10aGVt
+ZS5ncmVzb3VyY2UueG1sKQoJY3AgIiR0aGVtZSIvZ25vbWUtc2hlbGwtdGhlbWUuZ3Jlc291cmNl
+IC4uLyIkKGJhc2VuYW1lICIkdGhlbWUiKSIKZG9uZQo=

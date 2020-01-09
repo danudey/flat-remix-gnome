@@ -1,7 +1,5 @@
-[Desktop Entry]
-Name=Flat Remix Darkest
-Comment=This session logs you into Flat Remix Darkest GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix-darkest gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-Darkest-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCBEYXJrZXN0CkNvbW1lbnQ9VGhpcyBzZXNz
+aW9uIGxvZ3MgeW91IGludG8gRmxhdCBSZW1peCBEYXJrZXN0IEdOT01FCkV4ZWM9ZW52IEdOT01F
+X1NIRUxMX1NFU1NJT05fTU9ERT1mbGF0LXJlbWl4LWRhcmtlc3QgZ25vbWUtc2Vzc2lvbgpUcnlF
+eGVjPWdub21lLXNlc3Npb24KVHlwZT1BcHBsaWNhdGlvbgpEZXNrdG9wTmFtZXM9RmxhdC1SZW1p
+eC1EYXJrZXN0LUdOT01FO0dOT01FOwo=

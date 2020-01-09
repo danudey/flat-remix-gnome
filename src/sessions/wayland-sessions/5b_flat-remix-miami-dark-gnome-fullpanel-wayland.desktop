@@ -1,7 +1,6 @@
-[Desktop Entry]
-Name=Flat Remix Miami Dark (full panel) on Wayland
-Comment=This session logs you into Flat Remix Miami Dark GNOME
-Exec=env GNOME_SHELL_SESSION_MODE=flat-remix-miami-dark-fullpanel gnome-session
-TryExec=gnome-session
-Type=Application
-DesktopNames=Flat-Remix-Miami-Dark-GNOME;GNOME;
+W0Rlc2t0b3AgRW50cnldCk5hbWU9RmxhdCBSZW1peCBNaWFtaSBEYXJrIChmdWxsIHBhbmVsKSBv
+biBXYXlsYW5kCkNvbW1lbnQ9VGhpcyBzZXNzaW9uIGxvZ3MgeW91IGludG8gRmxhdCBSZW1peCBN
+aWFtaSBEYXJrIEdOT01FCkV4ZWM9ZW52IEdOT01FX1NIRUxMX1NFU1NJT05fTU9ERT1mbGF0LXJl
+bWl4LW1pYW1pLWRhcmstZnVsbHBhbmVsIGdub21lLXNlc3Npb24KVHJ5RXhlYz1nbm9tZS1zZXNz
+aW9uClR5cGU9QXBwbGljYXRpb24KRGVza3RvcE5hbWVzPUZsYXQtUmVtaXgtTWlhbWktRGFyay1H
+Tk9NRTtHTk9NRTsK

@@ -1,142 +1,92 @@
-# GNU make is required to run this file. To install on *BSD, run:
-#   gmake PREFIX=/usr/local install
-
-PREFIX ?= /usr
-IGNORE ?=
-THEMES ?= $(patsubst %/index.theme,%,$(wildcard ./*/index.theme))
-IS_UBUNTU ?= $(shell [ "$$(lsb_release -si 2> /dev/null)" = Ubuntu ] && echo true)
-PKGNAME = flat-remix-gnome
-MAINTAINER = Daniel Ruiz de Alegría <daniel@drasite.com>
-
-
-# excludes IGNORE from THEMES list
-THEMES := $(filter-out $(IGNORE), $(THEMES))
-
-all:
-	# skip background-sync when packaging
-	$(if $(DEB_BUILD_OPTIONS),, cd src && HOME=$$(eval echo ~$$SUDO_USER) ./build.sh --sync-login-background)
-
-build:
-	cd src && ./build.sh -r
-
-install:
-	mkdir -p $(DESTDIR)$(PREFIX)/share/themes
-	cp -a $(THEMES) $(DESTDIR)$(PREFIX)/share/themes/
-	mkdir -p $(DESTDIR)$(PREFIX)/share/gnome-shell/theme
-	$(foreach theme, $(THEMES), ln -sf $(PREFIX)/share/themes/$(theme)/gnome-shell $(DESTDIR)$(PREFIX)/share/gnome-shell/theme/$(theme);)
-	mkdir -p $(DESTDIR)$(PREFIX)/share/gnome-shell/modes
-	cp -a src/modes/* $(DESTDIR)$(PREFIX)/share/gnome-shell/modes/
-	mkdir -p $(DESTDIR)$(PREFIX)/share/xsessions
-	cp -a src/sessions/xsessions/* $(DESTDIR)$(PREFIX)/share/xsessions/
-	mkdir -p $(DESTDIR)$(PREFIX)/share/wayland-sessions
-	cp -a src/sessions/wayland-sessions/* $(DESTDIR)$(PREFIX)/share/wayland-sessions/
-	ln -sf $(PREFIX)/share/themes/Flat-Remix/gnome-shell/assets/ $(DESTDIR)$(PREFIX)/share/gnome-shell/theme/assets
-
-	# skip replacing gnome's theme when packaging
-	$(if $(DESTDIR),, $(MAKE) Flat-Remix)
-
-$(THEMES):
-ifeq ($(IS_UBUNTU), true)
-	-ln -sf $(PREFIX)/share/themes/$@/gnome-shell/assets/ $(PREFIX)/share/gnome-shell/theme/assets
-	-update-alternatives --install $(PREFIX)/share/gnome-shell/theme/gdm3.css gdm3.css $(PREFIX)/share/themes/$@/gnome-shell/gnome-shell.css 100
-else
-	-mv -n $(PREFIX)/share/gnome-shell/gnome-shell-theme.gresource $(PREFIX)/share/gnome-shell/gnome-shell-theme.gresource.old
-	-ln -sf $(PREFIX)/share/themes/$@/gnome-shell-theme.gresource $(PREFIX)/share/gnome-shell/gnome-shell-theme.gresource
-endif
-
-uninstall:
-	-rm -rf $(foreach theme, $(THEMES), $(PREFIX)/share/themes/$(theme))
-	-rm -rf $(foreach theme, $(THEMES) assets, $(PREFIX)/share/gnome-shell/theme/$(theme))
-	-rm -rf $(PREFIX)/share/gnome-shell/modes/flat-remix*.json
-	-rm -rf $(PREFIX)/share/xsessions/??_flat-remix*.desktop
-	-rm -rf $(PREFIX)/share/wayland-sessions/??_flat-remix*.desktop
-ifeq ($(IS_UBUNTU), true)
-	-$(foreach theme, $(THEMES), update-alternatives --remove gdm3.css /usr/share/themes/$(theme)/gnome-shell/gnome-shell.css 2> /dev/null;)
-	-update-alternatives --auto gdm3.css
-else
-	-mv $(PREFIX)/share/gnome-shell/gnome-shell-theme.gresource.old $(PREFIX)/share/gnome-shell/gnome-shell-theme.gresource
-endif
-
-_get_version:
-	$(eval VERSION ?= $(shell git show -s --format=%cd --date=format:%Y%m%d HEAD))
-	@echo $(VERSION)
-
-_get_tag:
-	$(eval TAG := $(shell git describe --abbrev=0 --tags))
-	@echo $(TAG)
-
-dist: _get_version
-	color_variants="- -Dark -Darkest -Miami -Miami-Dark"; \
-	theme_variants="- -fullPanel"; \
-	count=1; \
-	for color_variant in $$color_variants; \
-	do \
-		[ "$$color_variant" = '-' ] && color_variant=''; \
-		for theme_variant in $$theme_variants; \
-		do \
-			[ "$$theme_variant" = '-' ] && theme_variant=''; \
-			file="Flat-Remix$${color_variant}$${theme_variant}"; \
-			if [ -d "$$file" ]; \
-			then \
-				count_pretty=$$(echo "0$${count}" | tail -c 3); \
-				tar -c "$$file" | \
-						xz -z - > "$${count_pretty}-$${file}_$(VERSION).tar.xz"; \
-				count=$$((count+1)); \
-			fi; \
-		done; \
-	done; \
-
-release: _get_version
-	$(MAKE) generate_changelog VERSION=$(VERSION)
-	$(MAKE) aur_release VERSION=$(VERSION)
-	$(MAKE) copr_release VERSION=$(VERSION)
-	$(MAKE) launchpad_release
-	git tag -f $(VERSION)
-	git push origin --tags
-	$(MAKE) dist
-
-aur_release: _get_version _get_tag
-	cd aur; \
-	sed "s/$(TAG)/$(VERSION)/g" -i PKGBUILD .SRCINFO; \
-	git commit -a -m "$(VERSION)"; \
-	git push origin master;
-
-	git commit aur -m "Update aur version $(VERSION)"
-	git push origin master
-
-copr_release: _get_version _get_tag
-	sed "s/$(TAG)/$(VERSION)/g" -i $(PKGNAME).spec
-	git commit $(PKGNAME).spec -m "Update $(PKGNAME).spec version $(VERSION)"
-	git push origin master
-
-launchpad_release: _get_version
-	cp -a Flat-Remix* src Makefile deb/$(PKGNAME)
-	sed "s/{}/$(VERSION)/g" -i deb/$(PKGNAME)/debian/changelog-template
-	cd deb/$(PKGNAME)/debian/ && echo " -- $(MAINTAINER)  $$(date -R)" | cat changelog-template - > changelog
-	cd deb/$(PKGNAME) && debuild -S -d
-	dput ppa deb/$(PKGNAME)_$(VERSION)_source.changes
-	git checkout deb
-	git clean -df deb
-
-undo_release: _get_tag
-	-git tag -d $(TAG)
-	-git push --delete origin $(TAG)
-
-generate_changelog: _get_version _get_tag
-	git checkout $(TAG) CHANGELOG
-	echo [$(VERSION)] > /tmp/out
-	git log --pretty=format:' * %s' $(TAG)..HEAD >> /tmp/out
-	echo >> /tmp/out
-	echo | cat - CHANGELOG >> /tmp/out
-	mv /tmp/out CHANGELOG
-	$$EDITOR CHANGELOG
-	git commit CHANGELOG -m "Update CHANGELOG version $(VERSION)"
-	git push origin master
-
-
-.PHONY: $(THEMES) all build install uninstall _get_version _get_tag dist release aur_release copr_release launchpad_release undo_release generate_changelog
-
-# .BEGIN is ignored by GNU make so we can use it as a guard
-.BEGIN:
-	@head -3 Makefile
-	@false
+IyBHTlUgbWFrZSBpcyByZXF1aXJlZCB0byBydW4gdGhpcyBmaWxlLiBUbyBpbnN0YWxsIG9uICpC
+U0QsIHJ1bjoKIyAgIGdtYWtlIFBSRUZJWD0vdXNyL2xvY2FsIGluc3RhbGwKClBSRUZJWCA/PSAv
+dXNyCklHTk9SRSA/PQpUSEVNRVMgPz0gJChwYXRzdWJzdCAlL2luZGV4LnRoZW1lLCUsJCh3aWxk
+Y2FyZCAuLyovaW5kZXgudGhlbWUpKQpJU19VQlVOVFUgPz0gJChzaGVsbCBbICIkJChsc2JfcmVs
+ZWFzZSAtc2kgMj4gL2Rldi9udWxsKSIgPSBVYnVudHUgXSAmJiBlY2hvIHRydWUpClBLR05BTUUg
+PSBmbGF0LXJlbWl4LWdub21lCk1BSU5UQUlORVIgPSBEYW5pZWwgUnVpeiBkZSBBbGVncsOtYSA8
+ZGFuaWVsQGRyYXNpdGUuY29tPgoKCiMgZXhjbHVkZXMgSUdOT1JFIGZyb20gVEhFTUVTIGxpc3QK
+VEhFTUVTIDo9ICQoZmlsdGVyLW91dCAkKElHTk9SRSksICQoVEhFTUVTKSkKCmFsbDoKCSMgc2tp
+cCBiYWNrZ3JvdW5kLXN5bmMgd2hlbiBwYWNrYWdpbmcKCSQoaWYgJChERUJfQlVJTERfT1BUSU9O
+UyksLCBjZCBzcmMgJiYgSE9NRT0kJChldmFsIGVjaG8gfiQkU1VET19VU0VSKSAuL2J1aWxkLnNo
+IC0tc3luYy1sb2dpbi1iYWNrZ3JvdW5kKQoKYnVpbGQ6CgljZCBzcmMgJiYgLi9idWlsZC5zaCAt
+cgoKaW5zdGFsbDoKCW1rZGlyIC1wICQoREVTVERJUikkKFBSRUZJWCkvc2hhcmUvdGhlbWVzCglj
+cCAtYSAkKFRIRU1FUykgJChERVNURElSKSQoUFJFRklYKS9zaGFyZS90aGVtZXMvCglta2RpciAt
+cCAkKERFU1RESVIpJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxsL3RoZW1lCgkkKGZvcmVhY2gg
+dGhlbWUsICQoVEhFTUVTKSwgbG4gLXNmICQoUFJFRklYKS9zaGFyZS90aGVtZXMvJCh0aGVtZSkv
+Z25vbWUtc2hlbGwgJChERVNURElSKSQoUFJFRklYKS9zaGFyZS9nbm9tZS1zaGVsbC90aGVtZS8k
+KHRoZW1lKTspCglta2RpciAtcCAkKERFU1RESVIpJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxs
+L21vZGVzCgljcCAtYSBzcmMvbW9kZXMvKiAkKERFU1RESVIpJChQUkVGSVgpL3NoYXJlL2dub21l
+LXNoZWxsL21vZGVzLwoJbWtkaXIgLXAgJChERVNURElSKSQoUFJFRklYKS9zaGFyZS94c2Vzc2lv
+bnMKCWNwIC1hIHNyYy9zZXNzaW9ucy94c2Vzc2lvbnMvKiAkKERFU1RESVIpJChQUkVGSVgpL3No
+YXJlL3hzZXNzaW9ucy8KCW1rZGlyIC1wICQoREVTVERJUikkKFBSRUZJWCkvc2hhcmUvd2F5bGFu
+ZC1zZXNzaW9ucwoJY3AgLWEgc3JjL3Nlc3Npb25zL3dheWxhbmQtc2Vzc2lvbnMvKiAkKERFU1RE
+SVIpJChQUkVGSVgpL3NoYXJlL3dheWxhbmQtc2Vzc2lvbnMvCglsbiAtc2YgJChQUkVGSVgpL3No
+YXJlL3RoZW1lcy9GbGF0LVJlbWl4L2dub21lLXNoZWxsL2Fzc2V0cy8gJChERVNURElSKSQoUFJF
+RklYKS9zaGFyZS9nbm9tZS1zaGVsbC90aGVtZS9hc3NldHMKCgkjIHNraXAgcmVwbGFjaW5nIGdu
+b21lJ3MgdGhlbWUgd2hlbiBwYWNrYWdpbmcKCSQoaWYgJChERVNURElSKSwsICQoTUFLRSkgRmxh
+dC1SZW1peCkKCiQoVEhFTUVTKToKaWZlcSAoJChJU19VQlVOVFUpLCB0cnVlKQoJLWxuIC1zZiAk
+KFBSRUZJWCkvc2hhcmUvdGhlbWVzLyRAL2dub21lLXNoZWxsL2Fzc2V0cy8gJChQUkVGSVgpL3No
+YXJlL2dub21lLXNoZWxsL3RoZW1lL2Fzc2V0cwoJLXVwZGF0ZS1hbHRlcm5hdGl2ZXMgLS1pbnN0
+YWxsICQoUFJFRklYKS9zaGFyZS9nbm9tZS1zaGVsbC90aGVtZS9nZG0zLmNzcyBnZG0zLmNzcyAk
+KFBSRUZJWCkvc2hhcmUvdGhlbWVzLyRAL2dub21lLXNoZWxsL2dub21lLXNoZWxsLmNzcyAxMDAK
+ZWxzZQoJLW12IC1uICQoUFJFRklYKS9zaGFyZS9nbm9tZS1zaGVsbC9nbm9tZS1zaGVsbC10aGVt
+ZS5ncmVzb3VyY2UgJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxsL2dub21lLXNoZWxsLXRoZW1l
+LmdyZXNvdXJjZS5vbGQKCS1sbiAtc2YgJChQUkVGSVgpL3NoYXJlL3RoZW1lcy8kQC9nbm9tZS1z
+aGVsbC10aGVtZS5ncmVzb3VyY2UgJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxsL2dub21lLXNo
+ZWxsLXRoZW1lLmdyZXNvdXJjZQplbmRpZgoKdW5pbnN0YWxsOgoJLXJtIC1yZiAkKGZvcmVhY2gg
+dGhlbWUsICQoVEhFTUVTKSwgJChQUkVGSVgpL3NoYXJlL3RoZW1lcy8kKHRoZW1lKSkKCS1ybSAt
+cmYgJChmb3JlYWNoIHRoZW1lLCAkKFRIRU1FUykgYXNzZXRzLCAkKFBSRUZJWCkvc2hhcmUvZ25v
+bWUtc2hlbGwvdGhlbWUvJCh0aGVtZSkpCgktcm0gLXJmICQoUFJFRklYKS9zaGFyZS9nbm9tZS1z
+aGVsbC9tb2Rlcy9mbGF0LXJlbWl4Ki5qc29uCgktcm0gLXJmICQoUFJFRklYKS9zaGFyZS94c2Vz
+c2lvbnMvPz9fZmxhdC1yZW1peCouZGVza3RvcAoJLXJtIC1yZiAkKFBSRUZJWCkvc2hhcmUvd2F5
+bGFuZC1zZXNzaW9ucy8/P19mbGF0LXJlbWl4Ki5kZXNrdG9wCmlmZXEgKCQoSVNfVUJVTlRVKSwg
+dHJ1ZSkKCS0kKGZvcmVhY2ggdGhlbWUsICQoVEhFTUVTKSwgdXBkYXRlLWFsdGVybmF0aXZlcyAt
+LXJlbW92ZSBnZG0zLmNzcyAvdXNyL3NoYXJlL3RoZW1lcy8kKHRoZW1lKS9nbm9tZS1zaGVsbC9n
+bm9tZS1zaGVsbC5jc3MgMj4gL2Rldi9udWxsOykKCS11cGRhdGUtYWx0ZXJuYXRpdmVzIC0tYXV0
+byBnZG0zLmNzcwplbHNlCgktbXYgJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxsL2dub21lLXNo
+ZWxsLXRoZW1lLmdyZXNvdXJjZS5vbGQgJChQUkVGSVgpL3NoYXJlL2dub21lLXNoZWxsL2dub21l
+LXNoZWxsLXRoZW1lLmdyZXNvdXJjZQplbmRpZgoKX2dldF92ZXJzaW9uOgoJJChldmFsIFZFUlNJ
+T04gPz0gJChzaGVsbCBnaXQgc2hvdyAtcyAtLWZvcm1hdD0lY2QgLS1kYXRlPWZvcm1hdDolWSVt
+JWQgSEVBRCkpCglAZWNobyAkKFZFUlNJT04pCgpfZ2V0X3RhZzoKCSQoZXZhbCBUQUcgOj0gJChz
+aGVsbCBnaXQgZGVzY3JpYmUgLS1hYmJyZXY9MCAtLXRhZ3MpKQoJQGVjaG8gJChUQUcpCgpkaXN0
+OiBfZ2V0X3ZlcnNpb24KCWNvbG9yX3ZhcmlhbnRzPSItIC1EYXJrIC1EYXJrZXN0IC1NaWFtaSAt
+TWlhbWktRGFyayI7IFwKCXRoZW1lX3ZhcmlhbnRzPSItIC1mdWxsUGFuZWwiOyBcCgljb3VudD0x
+OyBcCglmb3IgY29sb3JfdmFyaWFudCBpbiAkJGNvbG9yX3ZhcmlhbnRzOyBcCglkbyBcCgkJWyAi
+JCRjb2xvcl92YXJpYW50IiA9ICctJyBdICYmIGNvbG9yX3ZhcmlhbnQ9Jyc7IFwKCQlmb3IgdGhl
+bWVfdmFyaWFudCBpbiAkJHRoZW1lX3ZhcmlhbnRzOyBcCgkJZG8gXAoJCQlbICIkJHRoZW1lX3Zh
+cmlhbnQiID0gJy0nIF0gJiYgdGhlbWVfdmFyaWFudD0nJzsgXAoJCQlmaWxlPSJGbGF0LVJlbWl4
+JCR7Y29sb3JfdmFyaWFudH0kJHt0aGVtZV92YXJpYW50fSI7IFwKCQkJaWYgWyAtZCAiJCRmaWxl
+IiBdOyBcCgkJCXRoZW4gXAoJCQkJY291bnRfcHJldHR5PSQkKGVjaG8gIjAkJHtjb3VudH0iIHwg
+dGFpbCAtYyAzKTsgXAoJCQkJdGFyIC1jICIkJGZpbGUiIHwgXAoJCQkJCQl4eiAteiAtID4gIiQk
+e2NvdW50X3ByZXR0eX0tJCR7ZmlsZX1fJChWRVJTSU9OKS50YXIueHoiOyBcCgkJCQljb3VudD0k
+JCgoY291bnQrMSkpOyBcCgkJCWZpOyBcCgkJZG9uZTsgXAoJZG9uZTsgXAoKcmVsZWFzZTogX2dl
+dF92ZXJzaW9uCgkkKE1BS0UpIGdlbmVyYXRlX2NoYW5nZWxvZyBWRVJTSU9OPSQoVkVSU0lPTikK
+CSQoTUFLRSkgYXVyX3JlbGVhc2UgVkVSU0lPTj0kKFZFUlNJT04pCgkkKE1BS0UpIGNvcHJfcmVs
+ZWFzZSBWRVJTSU9OPSQoVkVSU0lPTikKCSQoTUFLRSkgbGF1bmNocGFkX3JlbGVhc2UKCWdpdCB0
+YWcgLWYgJChWRVJTSU9OKQoJZ2l0IHB1c2ggb3JpZ2luIC0tdGFncwoJJChNQUtFKSBkaXN0Cgph
+dXJfcmVsZWFzZTogX2dldF92ZXJzaW9uIF9nZXRfdGFnCgljZCBhdXI7IFwKCXNlZCAicy8kKFRB
+RykvJChWRVJTSU9OKS9nIiAtaSBQS0dCVUlMRCAuU1JDSU5GTzsgXAoJZ2l0IGNvbW1pdCAtYSAt
+bSAiJChWRVJTSU9OKSI7IFwKCWdpdCBwdXNoIG9yaWdpbiBtYXN0ZXI7CgoJZ2l0IGNvbW1pdCBh
+dXIgLW0gIlVwZGF0ZSBhdXIgdmVyc2lvbiAkKFZFUlNJT04pIgoJZ2l0IHB1c2ggb3JpZ2luIG1h
+c3RlcgoKY29wcl9yZWxlYXNlOiBfZ2V0X3ZlcnNpb24gX2dldF90YWcKCXNlZCAicy8kKFRBRykv
+JChWRVJTSU9OKS9nIiAtaSAkKFBLR05BTUUpLnNwZWMKCWdpdCBjb21taXQgJChQS0dOQU1FKS5z
+cGVjIC1tICJVcGRhdGUgJChQS0dOQU1FKS5zcGVjIHZlcnNpb24gJChWRVJTSU9OKSIKCWdpdCBw
+dXNoIG9yaWdpbiBtYXN0ZXIKCmxhdW5jaHBhZF9yZWxlYXNlOiBfZ2V0X3ZlcnNpb24KCWNwIC1h
+IEZsYXQtUmVtaXgqIHNyYyBNYWtlZmlsZSBkZWIvJChQS0dOQU1FKQoJc2VkICJzL3t9LyQoVkVS
+U0lPTikvZyIgLWkgZGViLyQoUEtHTkFNRSkvZGViaWFuL2NoYW5nZWxvZy10ZW1wbGF0ZQoJY2Qg
+ZGViLyQoUEtHTkFNRSkvZGViaWFuLyAmJiBlY2hvICIgLS0gJChNQUlOVEFJTkVSKSAgJCQoZGF0
+ZSAtUikiIHwgY2F0IGNoYW5nZWxvZy10ZW1wbGF0ZSAtID4gY2hhbmdlbG9nCgljZCBkZWIvJChQ
+S0dOQU1FKSAmJiBkZWJ1aWxkIC1TIC1kCglkcHV0IHBwYSBkZWIvJChQS0dOQU1FKV8kKFZFUlNJ
+T04pX3NvdXJjZS5jaGFuZ2VzCglnaXQgY2hlY2tvdXQgZGViCglnaXQgY2xlYW4gLWRmIGRlYgoK
+dW5kb19yZWxlYXNlOiBfZ2V0X3RhZwoJLWdpdCB0YWcgLWQgJChUQUcpCgktZ2l0IHB1c2ggLS1k
+ZWxldGUgb3JpZ2luICQoVEFHKQoKZ2VuZXJhdGVfY2hhbmdlbG9nOiBfZ2V0X3ZlcnNpb24gX2dl
+dF90YWcKCWdpdCBjaGVja291dCAkKFRBRykgQ0hBTkdFTE9HCgllY2hvIFskKFZFUlNJT04pXSA+
+IC90bXAvb3V0CglnaXQgbG9nIC0tcHJldHR5PWZvcm1hdDonICogJXMnICQoVEFHKS4uSEVBRCA+
+PiAvdG1wL291dAoJZWNobyA+PiAvdG1wL291dAoJZWNobyB8IGNhdCAtIENIQU5HRUxPRyA+PiAv
+dG1wL291dAoJbXYgL3RtcC9vdXQgQ0hBTkdFTE9HCgkkJEVESVRPUiBDSEFOR0VMT0cKCWdpdCBj
+b21taXQgQ0hBTkdFTE9HIC1tICJVcGRhdGUgQ0hBTkdFTE9HIHZlcnNpb24gJChWRVJTSU9OKSIK
+CWdpdCBwdXNoIG9yaWdpbiBtYXN0ZXIKCgouUEhPTlk6ICQoVEhFTUVTKSBhbGwgYnVpbGQgaW5z
+dGFsbCB1bmluc3RhbGwgX2dldF92ZXJzaW9uIF9nZXRfdGFnIGRpc3QgcmVsZWFzZSBhdXJfcmVs
+ZWFzZSBjb3ByX3JlbGVhc2UgbGF1bmNocGFkX3JlbGVhc2UgdW5kb19yZWxlYXNlIGdlbmVyYXRl
+X2NoYW5nZWxvZwoKIyAuQkVHSU4gaXMgaWdub3JlZCBieSBHTlUgbWFrZSBzbyB3ZSBjYW4gdXNl
+IGl0IGFzIGEgZ3VhcmQKLkJFR0lOOgoJQGhlYWQgLTMgTWFrZWZpbGUKCUBmYWxzZQo=

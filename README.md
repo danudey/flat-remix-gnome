@@ -1,6 +1,7 @@
-![Flat Remix GNOME theme](https://github.com/daniruiz/flat-remix-gnome/raw/master/assets/logo.png)
-===============================
-
-### More information and installation instructions at [drasite.com/flat-remix-gnome](https://drasite.com/flat-remix-gnome)
-
-![theme preview](https://github.com/daniruiz/flat-remix-gnome/raw/master/assets/preview.png)
+IVtGbGF0IFJlbWl4IEdOT01FIHRoZW1lXShodHRwczovL2dpdGh1Yi5jb20vZGFuaXJ1aXovZmxh
+dC1yZW1peC1nbm9tZS9yYXcvbWFzdGVyL2Fzc2V0cy9sb2dvLnBuZykKPT09PT09PT09PT09PT09
+PT09PT09PT09PT09PT09PQoKIyMjIE1vcmUgaW5mb3JtYXRpb24gYW5kIGluc3RhbGxhdGlvbiBp
+bnN0cnVjdGlvbnMgYXQgW2RyYXNpdGUuY29tL2ZsYXQtcmVtaXgtZ25vbWVdKGh0dHBzOi8vZHJh
+c2l0ZS5jb20vZmxhdC1yZW1peC1nbm9tZSkKCiFbdGhlbWUgcHJldmlld10oaHR0cHM6Ly9naXRo
+dWIuY29tL2RhbmlydWl6L2ZsYXQtcmVtaXgtZ25vbWUvcmF3L21hc3Rlci9hc3NldHMvcHJldmll
+dy5wbmcpCg==
